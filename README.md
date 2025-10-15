@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
@@ -10,3 +11,23 @@ Currently, two official plugins are available:
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+=======
+# 👥 Gerenciador de Usuários — Backend
+
+Este é o backend do projeto **Gerenciador de Usuários**, desenvolvido por **Patricia Silva** usando **Node.js, Express, Prisma e MongoDB**. Ele oferece uma API REST para criar, listar, atualizar e excluir usuários.
+
+---
+
+## 🚀 Tecnologias utilizadas
+
+- Node.js
+- Express
+- Prisma ORM
+- MongoDB
+- CORS
+- Dotenv
+
+---
+
+## 📁 Estrutura do projeto
+>>>>>>> 91c9db6f16fbbe79eb005136662377687c1a9fef
