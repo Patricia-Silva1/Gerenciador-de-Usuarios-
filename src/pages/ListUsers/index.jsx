@@ -1,24 +1,25 @@
-import express from 'express';
-import cors from 'cors';
-import { PrismaClient } from '@prisma/client';
-import { ObjectId } from 'mongodb';
-import dotenv from 'dotenv';
+import { useEffect, useState } from "react";
 
-dotenv.config(); // ← Carrega variáveis do .env
+function ListUsers() {
+  const [users, setUsers] = useState([]);
 
-const prisma = new PrismaClient();
-const app = express();
+  useEffect(() => {
+    fetch("http://localhost:3001/api/users")
+      .then((res) => res.json())
+      .then(setUsers)
+      .catch((err) => console.error("Erro ao buscar usuários:", err));
+  }, []);
 
-// 🔐 CORS dinâmico via variável de ambiente
-app.use(cors({
-  origin: process.env.CORS_ORIGIN || '*'
-}));
+  return (
+    <div>
+      <h1>Lista de Usuários</h1>
+      <ul>
+        {users.map((user) => (
+          <li key={user.id}>{user.name}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
 
-app.use(express.json());
-
-// ... (suas rotas GET, POST, PUT, DELETE continuam iguais)
-
-// Inicialização do servidor
-app.listen(3001, () => {
-  console.log('🚀 Servidor rodando na porta 3001');
-});
+export default ListUsers;
