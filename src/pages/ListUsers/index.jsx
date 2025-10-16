@@ -16,14 +16,14 @@ import {
 } from './styles';
 
 function ListUsers() {
-  const [usuarios, setUsuarios] = useState([]);
+  const [users, setUsers] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     async function getUsers() {
       try {
         const { data } = await api.get("/usuarios");
-        setUsuarios(data);
+        setUsers(data);
       } catch (error) {
         console.error("Erro ao buscar usuários:", error);
       }
@@ -31,15 +31,10 @@ function ListUsers() {
     getUsers();
   }, []);
 
-  async function deleteUsers(id) {
+  async function deleteUser(id) {
     try {
-       await api.delete(`/usuarios/${id}`);
-
-// Atualiza a lista após deletar
-const updatedUsers = usuarios.filter((user) => user.id !== id);
-setUsuarios(updatedUsers);
-
-
+      await api.delete(`/usuarios/${id}`);
+      setUsers((prevUsers) => prevUsers.filter((user) => user.id !== id));
     } catch (error) {
       console.error("Erro ao deletar usuário:", error);
     }
@@ -51,7 +46,7 @@ setUsuarios(updatedUsers);
       <Title>Lista de Usuários</Title>
 
       <ContainerUsers>
-        {usuarios.map((user) => (
+        {users.map((user) => (
           <CardUsers key={user.id}>
             <AvatarUser src={`https://avatar.iran.liara.run/public?username=${user.id}`} />
             <div>
@@ -59,7 +54,13 @@ setUsuarios(updatedUsers);
               <p>Idade: {user.age}</p>
               <p>Email: {user.email}</p>
             </div>
-            <TrashIcon src={Trash} alt="icone-lixo" onClick={() => deleteUsers(user.id)} />
+            <TrashIcon
+              src={Trash}
+              alt="Ícone de lixeira"
+              role="button"
+              tabIndex={0}
+              onClick={() => deleteUser(user.id)}
+            />
           </CardUsers>
         ))}
       </ContainerUsers>
